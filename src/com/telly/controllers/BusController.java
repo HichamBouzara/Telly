@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.telly.dao.Bus;
 import com.telly.dao.FormValidationGroup;
+import com.telly.service.BusService;
 
 @Controller
 public class BusController {
@@ -48,6 +49,19 @@ public class BusController {
 		model.addAttribute("bus", new Bus());
 
 		return "results";
+	}
+
+	@RequestMapping(value = "/resultsfrom", method = RequestMethod.GET)
+	public String leaveFrom(@Validated(FormValidationGroup.class) Bus bus, BindingResult result, Model model,
+			Principal principal) {
+
+		List<Bus> results = busService.getCity(bus.getLeaveFrom(), bus.getGoingTo(), bus.getDateLeave(),
+				bus.getDateReturn());
+		model.addAttribute("results", results);
+		System.out.println(results);
+
+		return "results";
+
 	}
 
 }
