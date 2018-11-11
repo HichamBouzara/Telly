@@ -42,4 +42,12 @@ public class BusController {
 
 	}
 
+	@RequestMapping("/results")
+	public String leave(Model model, Principal principal) {
+
+		model.addAttribute("bus", new Bus());
+
+		return "results";
+	}
+
 }
